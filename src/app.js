@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express'),
       path = require('path'),
       morgan = require('morgan'),
@@ -17,11 +19,11 @@ app.set('view engine', 'ejs');
 // middlewares
 app.use(morgan('dev'));
 app.use(myConnection(mysql, {
-  host: 'localhost',
-  user: 'root',
-  password: 'Kotarz15$%',
-  port: 3306,
-  database: 'systemuni'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME,
 }, 'single'));
 app.use(express.urlencoded({extended: false}));
 
